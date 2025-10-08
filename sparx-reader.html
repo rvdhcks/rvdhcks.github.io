@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sparx Reader Code | RVDHCKS</title>
+    <style>
+        body {
+            background: #000;
+            color: crimson;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .topbar {
+            background: #222;
+            color: crimson;
+            padding: 1.5em 0 1em 0;
+            text-align: center;
+            box-shadow: 0 2px 8px #111;
+            position: relative;
+        }
+        h1, .slogan, .login-btn, .pin-section label, select, input, button, .user-info, h2, h3, pre {
+            text-shadow: 0 0 8px crimson, 0 0 16px crimson;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.2em;
+            letter-spacing: 2px;
+        }
+        .slogan {
+            font-size: 1em;
+            color: crimson;
+            opacity: 0.7;
+            margin-bottom: 2em;
+        }
+        .pin-section {
+            margin: 2em auto;
+            text-align: center;
+        }
+        input[type="text"] {
+            padding: 0.5em;
+            font-size: 1.2em;
+            border: 2px solid crimson;
+            background: #111;
+            color: crimson;
+            border-radius: 5px;
+            outline: none;
+        }
+        button {
+            background: crimson;
+            color: #000;
+            border: none;
+            padding: 0.6em 1.2em;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 0.5em;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #a3001a;
+        }
+        select {
+            padding: 0.5em;
+            font-size: 1.1em;
+            border: 2px solid crimson;
+            background: #111;
+            color: crimson;
+            border-radius: 5px;
+            outline: none;
+        }
+        .login-btn {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: crimson;
+            color: #000;
+            border: none;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-btn:hover {
+            background: #a3001a;
+        }
+        .user-info {
+            position: absolute;
+            right: 140px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: crimson;
+            font-size: 1em;
+            text-shadow: 0 0 8px crimson, 0 0 16px crimson;
+        }
+        .code-content {
+            display: none;
+            margin: 2em auto;
+            max-width: 600px;
+            background: #111;
+            padding: 1.5em;
+            border-radius: 10px;
+            box-shadow: 0 0 10px crimson;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: crimson;
+            border: none;
+            color: #000;
+            border-radius: 5px;
+            padding: 0.2em 0.4em;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.2s;
+            box-shadow: 0 0 8px crimson;
+            z-index: 2;
+        }
+        .copy-btn:hover {
+            background: #a3001a;
+        }
+        .code-box {
+            font-family: 'Courier New', monospace;
+            background: #222;
+            color: crimson;
+            padding: 1em;
+            border-radius: 5px;
+            border-left: 4px solid crimson;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            white-space: pre-wrap;
+            word-break: break-all;
+            position: relative;
+        }
+        .rvdhcks-title {
+            color: crimson !important;
+            margin-bottom: 0.2em;
+            cursor: pointer;
+            transition: transform 0.2s, text-shadow 0.2s;
+            text-shadow: 0 0 8px crimson, 0 0 16px crimson;
+            display: inline-block;
+        }
+        .rvdhcks-title:hover, .rvdhcks-title:active {
+            animation: glow-pop 0.5s;
+            transform: scale(1.08) rotate(-2deg);
+            text-shadow: 0 0 24px crimson, 0 0 48px crimson;
+        }
+        @keyframes glow-pop {
+            0% { transform: scale(1) rotate(0deg); text-shadow: 0 0 8px crimson, 0 0 16px crimson; }
+            50% { transform: scale(1.15) rotate(-3deg); text-shadow: 0 0 32px crimson, 0 0 64px crimson; }
+            100% { transform: scale(1.08) rotate(-2deg); text-shadow: 0 0 24px crimson, 0 0 48px crimson; }
+        }
+        .codes-list-btn {
+            position: absolute;
+            right: 170px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: crimson;
+            color: #000;
+            border: none;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+            z-index: 10;
+        }
+        .codes-list-btn:hover {
+            background: #a3001a;
+        }
+        .footer-trademark {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1em 0;
+            color: crimson;
+            opacity: 0.7;
+            font-size: 1em;
+            background: #111;
+            text-shadow: 0 0 8px crimson;
+            z-index: 100;
+        }
+        .bookmarklet-btn {
+            display: inline-block;
+            margin-bottom: 1em;
+            padding: 0.5em 1em;
+            background: crimson;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            cursor: grab;
+            text-shadow: 0 0 8px crimson, 0 0 16px crimson;
+            transition: background 0.2s;
+            user-select: none;
+        }
+        .bookmarklet-btn:active {
+            background: #a3001a;
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="index.html" style="text-decoration:none;">
+            <h1 class="rvdhcks-title">RVDHCKS</h1>
+        </a>
+        <div class="slogan" style="margin-bottom:0;">Hacks for reasonable prices</div>
+        <span class="user-info" id="userInfo" style="display:none;"></span>
+        <button class="codes-list-btn" id="codesListBtn" style="display:none;" onclick="window.location.href='codes-list.html'">View All Codes</button>
+        <button class="login-btn" id="loginBtn" onclick="handleLoginLogout()">Login</button>
+    </div>
+    <div class="pin-section">
+        <h3 style="margin-bottom:1em;">Sparx Reader Code</h3>
+        <label for="pin">Enter 6-digit PIN:</label>
+        <input type="text" id="pin" maxlength="6" pattern="\d{6}">
+        <button id="accessBtn">Access Code</button>
+        <div id="pinError" style="color: crimson; margin-top: 1em; display: none;">Invalid or used PIN.</div>
+    </div>
+    <div class="code-content" id="codeContent">
+        <h3>Your Sparx Reader Code:</h3>
+        <div style="display:flex;align-items:center;gap:1em;justify-content:flex-start;">
+            <a class="bookmarklet-btn" id="bookmarkletBtn"
+               href="javascript:(function(){document.body.style.userSelect='text';void 0;})()"
+               draggable="true"
+               title="Drag to your bookmarks bar">
+                Copy Enable
+            </a>
+            <button id="instructionsBtn" style="background:crimson;color:#000;border:none;border-radius:5px;padding:0.5em 1em;cursor:pointer;font-size:1em;transition:background 0.2s;">
+                Instructions
+            </button>
+        </div>
+        <div id="instructionsBox" style="display:none;margin:1em 0 2em 0;padding:1em;background:#222;color:crimson;border-radius:8px;box-shadow:0 0 8px crimson;">
+            <div style="margin-bottom:1em;">
+                <label for="browserSelect" style="font-weight:bold;">Choose your browser:</label>
+                <select id="browserSelect" style="margin-left:1em;padding:0.3em 1em;background:#111;color:crimson;border-radius:5px;border:1px solid crimson;">
+                    <option value="chrome">Chrome</option>
+                    <option value="brave">Brave</option>
+                    <option value="opera">Opera</option>
+                    <option value="edge">Edge</option>
+                    <option value="firefox">Firefox</option>
+                </select>
+            </div>
+            <div id="browserInstructions">
+                <!-- Instructions will be inserted here -->
+            </div>
+        </div>
+        <div class="code-box" id="copyCodeBox">
+            <button class="copy-btn" id="copyBtn" title="Copy">&#128203;</button>
+            javascript:(function(){document.body.style.userSelect='text';void 0;})()
+        </div>
+        <div id="copyMsg" style="color:crimson; margin-top:0.5em; display:none;">Copied!</div>
+    </div>
+    <div class="footer-trademark">
+        &copy; RVDHCKS Trademark
+    </div>
+    <script>
+        // Only you know these codes; keep them secret!
+        const VALID_CODES = [
+            "a9f3b2","c7d8e1","f2a6c4","b5e9d3","e8c1a7","d4b2f6","c3e7a9","f8b1d2","a6e3c5","b7f2e8",
+            "e1c9b4","d8a3f7","c2f6b5","f3e1a8","a7d4c9","b1e8f3","e6c5a2","d3b7f8","c4e9a1","f7b2d6",
+            "a8f1c3","b9e2d4","e3c7a5","d6b1f9","c5e8a2","f2b3d7","a1f6c8","b4e3d9","e7c2a6","d9b5f1",
+            "c8e1a3","f6b7d2","a2f9c4","b3e6d8","e4c5a7","d1b8f3","c7e2a9","f9b1d4","a3f2c6","b5e7d1",
+            "e2c8a4","d7b3f6","c1e9a5","f4b2d8","a6f3c7","b8e1d2","e9c4a1","d2b6f7","c6e3a8","f1b9d3"
+        ];
+        let usedCodes = JSON.parse(localStorage.getItem('sparxReaderUsedCodes') || "[]");
+
+        document.getElementById('accessBtn').onclick = function() {
+            const pin = document.getElementById('pin').value;
+            const username = localStorage.getItem('rvdhcks_user');
+            if (username === 'Muhammad-Ameen-Bagas') {
+                const bagasCode = "MB-2024";
+                let usedBagas = JSON.parse(localStorage.getItem('bagasUsedCodes') || "[]");
+                if (pin === bagasCode && !usedBagas.includes(pin)) {
+                    document.getElementById('codeContent').style.display = 'block';
+                    document.getElementById('pinError').style.display = 'none';
+                    usedBagas.push(pin);
+                    localStorage.setItem('bagasUsedCodes', JSON.stringify(usedBagas));
+                } else {
+                    document.getElementById('codeContent').style.display = 'none';
+                    document.getElementById('pinError').style.display = 'block';
+                }
+                return;
+            }
+            if (VALID_CODES.includes(pin) && !usedCodes.includes(pin)) {
+                document.getElementById('codeContent').style.display = 'block';
+                document.getElementById('pinError').style.display = 'none';
+                usedCodes.push(pin);
+                localStorage.setItem('sparxReaderUsedCodes', JSON.stringify(usedCodes));
+            } else {
+                document.getElementById('codeContent').style.display = 'none';
+                document.getElementById('pinError').style.display = 'block';
+            }
+        };
+
+        // Instructions logic
+        const instructionsBtn = document.getElementById('instructionsBtn');
+        const instructionsBox = document.getElementById('instructionsBox');
+        const browserSelect = document.getElementById('browserSelect');
+        const browserInstructions = document.getElementById('browserInstructions');
+
+        const instructions = {
+            chrome: `
+                <b>Chrome:</b><br>
+                1. Drag the <b>Copy Enable</b> button above to your bookmarks bar.<br>
+                2. Go to any website.<br>
+                3. Click the new bookmarklet in your bookmarks bar.<br>
+                4. You can now select and copy text from the page.<br>
+                <i>If you don't see your bookmarks bar, press <b>Ctrl+Shift+B</b> to show it.</i>
+            `,
+            brave: `
+                <b>Brave:</b><br>
+                1. Drag the <b>Copy Enable</b> button above to your bookmarks bar.<br>
+                2. Go to any website.<br>
+                3. Click the new bookmarklet in your bookmarks bar.<br>
+                4. You can now select and copy text from the page.<br>
+                <i>If you don't see your bookmarks bar, press <b>Ctrl+Shift+B</b> to show it.</i>
+            `,
+            opera: `
+                <b>Opera:</b><br>
+                1. Drag the <b>Copy Enable</b> button above to your bookmarks bar.<br>
+                2. Go to any website.<br>
+                3. Click the new bookmarklet in your bookmarks bar.<br>
+                4. You can now select and copy text from the page.<br>
+                <i>If you don't see your bookmarks bar, go to <b>Menu &gt; Bookmarks &gt; Show bookmarks bar</b>.</i>
+            `,
+            edge: `
+                <b>Edge:</b><br>
+                1. Drag the <b>Copy Enable</b> button above to your favorites bar.<br>
+                2. Go to any website.<br>
+                3. Click the new bookmarklet in your favorites bar.<br>
+                4. You can now select and copy text from the page.<br>
+                <i>If you don't see your favorites bar, press <b>Ctrl+Shift+B</b> to show it.</i>
+            `,
+            firefox: `
+                <b>Firefox:</b><br>
+                1. Right-click the <b>Copy Enable</b> button above and choose <b>Bookmark This Link</b>.<br>
+                2. Save it to your bookmarks toolbar.<br>
+                3. Go to any website.<br>
+                4. Click the new bookmarklet in your bookmarks toolbar.<br>
+                5. You can now select and copy text from the page.<br>
+                <i>If you don't see your bookmarks toolbar, click the menu button and go to <b>Bookmarks &gt; Show Bookmarks Toolbar</b>.</i>
+            `
+        };
+
+        function showInstructions(browser) {
+            browserInstructions.innerHTML = instructions[browser] || instructions.chrome;
+        }
+
+        instructionsBtn.onclick = function() {
+            instructionsBox.style.display = instructionsBox.style.display === 'none' ? 'block' : 'none';
+            showInstructions(browserSelect.value);
+        };
+
+        browserSelect.onchange = function() {
+            showInstructions(browserSelect.value);
+        };
+
+        // Copy button logic
+        document.getElementById('copyBtn').onclick = function() {
+            const code = "javascript:(function(){document.body.style.userSelect='text';void 0;})()";
+            navigator.clipboard.writeText(code).then(function() {
+                document.getElementById('copyMsg').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('copyMsg').style.display = 'none';
+                }, 1200);
+            });
+        };
+
+        // Login/logout UI logic
+        function updateLoginUI() {
+            const username = localStorage.getItem('rvdhcks_user');
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const codesListBtn = document.getElementById('codesListBtn');
+            if (username) {
+                loginBtn.textContent = 'Log out';
+                userInfo.textContent = 'Signed in as ' + username;
+                userInfo.style.display = 'inline';
+                if (codesListBtn) {
+                    codesListBtn.style.display = (username === 'Rvdhck') ? 'inline' : 'none';
+                }
+            } else {
+                loginBtn.textContent = 'Login';
+                userInfo.style.display = 'none';
+                if (codesListBtn) {
+                    codesListBtn.style.display = 'none';
+                }
+            }
+        }
+        function handleLoginLogout() {
+            const username = localStorage.getItem('rvdhcks_user');
+            if (username) {
+                localStorage.removeItem('rvdhcks_user');
+                updateLoginUI();
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+        updateLoginUI();
+
+        // Disable right-click/context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+Shift+C
+        document.addEventListener('keydown', function(e) {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                (e.ctrlKey && e.key === 'U')
+            ) {
+                e.preventDefault();
+                window.location.href = 'https://www.google.com';
+            }
+        });
+
+        // Detect if only DevTools is open (very basic check)
+        let devtoolsOpen = false;
+        const threshold = 160;
+        setInterval(function() {
+            const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+            const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+            if (widthThreshold || heightThreshold) {
+                if (!devtoolsOpen) {
+                    devtoolsOpen = true;
+                    window.location.href = 'https://www.google.com';
+                }
+            } else {
+                devtoolsOpen = false;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
